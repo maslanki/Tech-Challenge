@@ -4,7 +4,7 @@ namespace BusinessLib.Models
     public partial class RequestResult
     {
         [JsonProperty("Content")]
-        public Order[] Content { get; set; }
+        public List<Order> Content { get; set; }
 
     }
 
@@ -81,7 +81,13 @@ namespace BusinessLib.Models
         [JsonProperty("Extra Data")]
         public string ExtraData { get; set; }
     }
+    public class Product
+    {
+        public string Gtin { get; set; }
+        public string ProductName { get; set; }
+        public int TotalQuantity { get; set; }
 
+    }
     public class Line
     {
         public string Status { get; set; }
