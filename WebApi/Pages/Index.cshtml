@@ -6,5 +6,83 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Orders with status IN_PROGRESS</a>.</p>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.orders[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orders[0].ChannelOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orders[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orders[0].Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var order in Model.orders){
+        <tr>
+            <td>
+                 @Html.DisplayFor(modelItem => order.Id)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => order.ChannelOrderNo)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => order.CreatedAt)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => order.Status)
+            </td>
+        </tr>
+        }
+    </tbody>
+    </table>
+
+
+<div class="text-center">
+    <p>Top 5 products sold</a>.</p>
+</div>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.products[0].MerchantProductNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products[0].Gtin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products[0].TotalQuantity)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model.products){
+        <tr>
+            <td>
+                 @Html.DisplayFor(modelItem => product.MerchantProductNo)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => product.ProductName)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => product.Gtin)
+            </td>
+             <td>
+                 @Html.DisplayFor(modelItem => product.TotalQuantity)
+            </td>
+        </tr>
+        }
+    </tbody>
+    </table>
