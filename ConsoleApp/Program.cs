@@ -1,10 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 
+using BusinessLib.Managers;
 
-using BusinessLib;
+var orderManager = new OrderManager();
 
-Console.WriteLine("Hello, World!");
-var x = new Class1();
-var res = await x.Get();
+Console.WriteLine("****** Orders with status IN_PROGRESS ******");
+var inProgressOrders = await orderManager.GetInProgressOrdersAsync();
+inProgressOrders.ForEach(o => Console.WriteLine(o));
 
-Console.WriteLine(res);
+Console.WriteLine("\n\n\n****** Top 5 products sold ******");
+var topProducts = await orderManager.GetTop5Products(inProgressOrders);
+topProducts.ForEach(o => Console.WriteLine(o));
