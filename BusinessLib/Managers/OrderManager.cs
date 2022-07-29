@@ -19,7 +19,7 @@ namespace BusinessLib.Managers
             return result.Content;
         }
 
-        public async Task<List<Product>> GetTop5Products(List<Order> orders = null)
+        public async Task<List<Product>> GetTop5ProductsAsync(List<Order> orders = null)
         {
             if(orders == null) orders = await GetInProgressOrdersAsync();
 
