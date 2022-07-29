@@ -1,13 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using BusinessLib.Helpers;
+using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Text;
+
 namespace BusinessLib.Models
 {
-    public partial class RequestResult
-    {
-        [JsonProperty("Content")]
-        public List<Order> Content { get; set; }
-
-    }
-
     public class Order
     {
         public int Id { get; set; }
@@ -49,6 +46,11 @@ namespace BusinessLib.Models
         public DateTime OrderDate { get; set; }
         public object ChannelCustomerNo { get; set; }
         public ExtraDatas ExtraData { get; set; }
+
+        public override string? ToString()
+        {
+            return DummyStringHelper.ToString(this);
+        }
     }
 
     public class Address
@@ -81,13 +83,7 @@ namespace BusinessLib.Models
         [JsonProperty("Extra Data")]
         public string ExtraData { get; set; }
     }
-    public class Product
-    {
-        public string Gtin { get; set; }
-        public string ProductName { get; set; }
-        public int TotalQuantity { get; set; }
 
-    }
     public class Line
     {
         public string Status { get; set; }
@@ -118,4 +114,5 @@ namespace BusinessLib.Models
         public string Condition { get; set; }
         public DateTime ExpectedDeliveryDate { get; set; }
     }
+
 }
