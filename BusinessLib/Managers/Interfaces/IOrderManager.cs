@@ -5,5 +5,6 @@ namespace BusinessLib.Managers.Interfaces
     {
         Task<List<Order>> GetInProgressOrdersAsync();
         Task<List<ProductViewModel>> GetTop5ProductsAsync(List<Order> orders = null);
+        Task SetStock(string merchantProductNo);
     }
 }

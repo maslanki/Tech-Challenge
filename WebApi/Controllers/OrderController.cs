@@ -27,5 +27,18 @@ namespace WebApi.Controllers
         {
             return await orderManager.GetTop5ProductsAsync();
         }
+
+        [HttpPatch, Route("Set25Stock")]
+        public async Task Set25StockAsync([FromQuery] string merchantProductNo)
+        {
+            try
+            {
+                await orderManager.SetStock(merchantProductNo);
+            }
+            catch(Exception e)
+            {
+                logger.LogError(new EventId(), e.Message);
+            }
+        }
     }
 }
