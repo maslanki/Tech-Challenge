@@ -1,10 +1,10 @@
-﻿using BusinessLib.Models;
-using Newtonsoft.Json;
+﻿using BusinessLib.Managers.Interfaces;
+using BusinessLib.Models;
 using System.Net.Http.Json;
 
 namespace BusinessLib.Managers
 {
-    public class OrderManager
+    public class OrderManager : IOrderManager
     {
         static string apikey = "541b989ef78ccb1bad630ea5b85c6ebff9ca3322";
         static string address = $"https://api-dev.channelengine.net/api/v2/orders?apikey={apikey}&statuses=IN_PROGRESS";
@@ -19,9 +19,9 @@ namespace BusinessLib.Managers
             return result.Content;
         }
 
-        public async Task<List<Product>> GetTop5Products()
+        public async Task<List<Product>> GetTop5Products(List<Order> orders = null)
         {
-            var orders = await GetInProgressOrdersAsync();
+            if(orders == null) orders = await GetInProgressOrdersAsync();
 
             //I assume GTIN is an ID of the product (?)
             //what about description? same GTIN gives different descriptions
