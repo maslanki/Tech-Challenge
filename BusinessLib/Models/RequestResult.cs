@@ -2,10 +2,10 @@
 
 namespace BusinessLib.Models
 {
-    public class RequestResult
+    public class RequestResult<T>
     {
         [JsonProperty("Content")]
-        public List<Order> Content { get; set; }
+        public List<T> Content { get; set; }
 
     }
 }

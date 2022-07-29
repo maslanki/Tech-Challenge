@@ -23,7 +23,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet, Route("Top5Products")]
-        public async Task<List<Product>> GetTop5ProductsAsync()
+        public async Task<List<ProductViewModel>> GetTop5ProductsAsync()
         {
             return await orderManager.GetTop5ProductsAsync();
         }
