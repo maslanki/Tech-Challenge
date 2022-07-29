@@ -24,19 +24,7 @@ namespace BusinessLib.Managers
         public async Task<List<ProductViewModel>> GetTop5ProductsAsync(List<Order> orders = null)
         {
             if(orders == null) orders = await GetInProgressOrdersAsync();
-
-            var products = orders
-                .SelectMany(o => o.Lines)
-                .GroupBy(l => l.MerchantProductNo)
-                .Select(g => new ProductViewModel
-                {
-                    MerchantProductNo = g.Key,
-                    Gtin = g.FirstOrDefault().Gtin,
-                    TotalQuantity = g.Sum(c => c.Quantity)
-                })
-                .OrderByDescending(g => g.TotalQuantity)
-                .Take(5)
-                .ToList();
+            var products = FilterTop5Products(orders);
 
             var address = $"https://api-dev.channelengine.net/api/v2/products?apikey={apikey}";
 
@@ -56,6 +44,27 @@ namespace BusinessLib.Managers
             }
 
             return products;
+        }
+
+        /// <summary>
+        /// Seperate method for filtering top 5 products, useful for unit testing
+        /// </summary>
+        /// <param name="orders"></param>
+        /// <returns></returns>
+        public List<ProductViewModel> FilterTop5Products(List<Order> orders)
+        {
+            return orders
+                .SelectMany(o => o.Lines)
+                .GroupBy(l => l.MerchantProductNo)
+                .Select(g => new ProductViewModel
+                {
+                    MerchantProductNo = g.Key,
+                    Gtin = g.FirstOrDefault().Gtin,
+                    TotalQuantity = g.Sum(c => c.Quantity)
+                })
+                .OrderByDescending(g => g.TotalQuantity)
+                .Take(5)
+                .ToList();
         }
     }
 
